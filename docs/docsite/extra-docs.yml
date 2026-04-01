@@ -1,0 +1,4 @@
+sections:
+  - title: How To Guides
+    toctree:
+      - how-to-use-checkpoints

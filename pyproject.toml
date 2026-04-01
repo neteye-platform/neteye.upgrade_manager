@@ -1,0 +1,10 @@
+[project]
+name = "neteye.upgrade_manager"
+dynamic = ["version"]
+description = "Ansible collection for managing the upgrade of NetEye components."
+readme = "README.md"
+license-files = ["LICENSE-APACHE", "LICENSE-MIT"]
+
+[tool.ruff.lint]
+# TODO: enable linting
+select = []

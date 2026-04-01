@@ -1,0 +1,15 @@
+namespace: neteye
+name: upgrade_manager
+version: 1.0.0
+readme: README.md
+authors:
+  - Würth IT Italy
+description: Ansible collection for managing the upgrade of NetEye components.
+license:
+  - MIT
+  - Apache-2.0
+tags:
+  - infrastructure
+  - tools
+repository: "https://github.com/neteye-platform/neteye.upgrade_manager"
+issues: "https://github.com/neteye-platform/neteye.upgrade_manager/issues"
