@@ -46,7 +46,7 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertFalse(result.exception.args[0]["changed"])
-        self.assertTrue(set(result.exception.args[0]["checkpoints"]) == set())
+        self.assertEqual(set(result.exception.args[0]["checkpoints"]), set())
 
         self.assertFalse(base_dir.exists())
 
@@ -66,8 +66,8 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertTrue(result.exception.args[0]["changed"])
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"]) == set([checkpoint_name])
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]), set([checkpoint_name])
         )
 
         checkpoint_file = base_dir / checkpoint.CHECKPOINT_SUBFOLDER / checkpoint_name
@@ -93,8 +93,8 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertFalse(result.exception.args[0]["changed"])
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"]) == set([checkpoint_name])
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]), set([checkpoint_name])
         )
 
         self.assertTrue(checkpoint_file.exists())
@@ -119,8 +119,8 @@ class TestCheckpoint(unittest.TestCase):
         self.assertFalse(result.exception.args[0]["changed"])
         log = Path("/tmp/ansible.log")
         log.write_text(str(result.exception.args[0]))
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"]) == set([checkpoint_name])
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]), set([checkpoint_name])
         )
 
         self.assertTrue(checkpoint_file.exists())
@@ -141,7 +141,7 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertFalse(result.exception.args[0]["changed"])
-        self.assertTrue(set(result.exception.args[0]["checkpoints"]) == set())
+        self.assertEqual(set(result.exception.args[0]["checkpoints"]), set())
 
         self.assertFalse(checkpoint_file.exists())
 
@@ -169,9 +169,9 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertFalse(result.exception.args[0]["changed"])
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"])
-            == set([checkpoint_name_1, checkpoint_name_2]),
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]),
+            set([checkpoint_name_1, checkpoint_name_2]),
         )
 
         self.assertTrue(checkpoint_file_1.exists())
@@ -199,8 +199,8 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertTrue(result.exception.args[0]["changed"])
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"]) == set([checkpoint_name_1])
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]), set([checkpoint_name_1])
         )
         self.assertFalse(checkpoint_file_1.exists())
 
@@ -218,7 +218,7 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertTrue(result.exception.args[0]["failed"])
-        self.assertTrue("does not start with" in result.exception.args[0]["msg"])
+        self.assertIn("does not start with", result.exception.args[0]["msg"])
 
     def test_delete_specific_checkpoint(self) -> None:
         base_dir = WORKING_DIR / current_function_name() / str(random.randint(0, 1000))
@@ -247,7 +247,7 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertTrue(result.exception.args[0]["changed"])
-        self.assertTrue(result.exception.args[0]["checkpoints"] == [checkpoint_name_1])
+        self.assertEqual(result.exception.args[0]["checkpoints"], [checkpoint_name_1])
         self.assertFalse(checkpoint_file_1.exists())
         self.assertTrue(checkpoint_file_2.exists())
 
@@ -283,9 +283,9 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertTrue(result.exception.args[0]["changed"])
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"])
-            == set([checkpoint_name_2, checkpoint_name_3])
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]),
+            set([checkpoint_name_2, checkpoint_name_3]),
         )
         self.assertTrue(checkpoint_file_1.exists())
         self.assertFalse(checkpoint_file_2.exists())
@@ -329,9 +329,9 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertTrue(result.exception.args[0]["changed"])
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"])
-            == set([checkpoint_name_2, checkpoint_name_3])
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]),
+            set([checkpoint_name_2, checkpoint_name_3]),
         )
         self.assertTrue(checkpoint_file_1.exists())
         self.assertFalse(checkpoint_file_2.exists())
@@ -375,7 +375,7 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertFalse(result.exception.args[0]["changed"])
-        self.assertTrue(result.exception.args[0]["checkpoints"] == [])
+        self.assertEqual(result.exception.args[0]["checkpoints"], [])
         self.assertTrue(checkpoint_file_1.exists())
         self.assertTrue(checkpoint_file_2.exists())
         self.assertTrue(checkpoint_file_3.exists())
@@ -418,16 +418,16 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertTrue(result.exception.args[0]["changed"])
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"])
-            == set(
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]),
+            set(
                 [
                     checkpoint_name_1,
                     checkpoint_name_2,
                     checkpoint_name_3,
                     checkpoint_name_4,
                 ]
-            )
+            ),
         )
         self.assertFalse(checkpoint_file_1.exists())
         self.assertFalse(checkpoint_file_2.exists())
@@ -518,8 +518,8 @@ class TestCheckpoint(unittest.TestCase):
             checkpoint.main()
 
         self.assertTrue(result.exception.args[0]["changed"])
-        self.assertTrue(
-            set(result.exception.args[0]["checkpoints"]) == set([checkpoint_name_1])
+        self.assertEqual(
+            set(result.exception.args[0]["checkpoints"]), set([checkpoint_name_1])
         )
         self.assertTrue(checkpoint_file_1.exists())
         self.assertTrue(checkpoint_file_2.exists())
